@@ -2,7 +2,7 @@ const User = require('../models/user');
 
 const banList = async (req, res, next) => {
     try {
-        const userId = req.user.id;
+        const userId = req.user.userId;
 
         const user = await User.findByPk(userId);
 
@@ -17,4 +17,4 @@ const banList = async (req, res, next) => {
     }
 };
 
-module.exports = checkBan;
+module.exports = banList;

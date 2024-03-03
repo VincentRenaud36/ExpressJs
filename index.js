@@ -1,11 +1,16 @@
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 const port = 3000;
 const sequelize = require('./sequelize');
 require('dotenv').config();
-const bodyParser = require('body-parser');
 const passport = require('passport');
 
+// Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(passport.initialize());
+// app.use(express.json());
 
 // Import Routes
 const helloRoute = require('./src/routes/routes');
@@ -22,10 +27,6 @@ app.use('/', profilRoute);
 app.use('/', fileRoute);
 app.use('/users', userRoute);
 
-// Middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(passport.initialize());
 
 require('./passport');
 

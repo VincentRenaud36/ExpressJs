@@ -7,11 +7,12 @@ const passport = require('passport');
 const fileController = require('../controllers/fileController');
 const banList = require('../middleware/banList');
 const userController = require('../controllers/userController');
+const profilController = require('../controllers/profilController');
 
 router.get('/test', helloController.getHello);
 router.post('/register', registerController.postRegister);
-router.post('/login', loginController.postLogin);
-router.get('/profil', passport.authenticate('jwt', { session: false }), banList, loginController.getProfil);
+router.post('/login', loginController.loginUser);
+router.get('/profil', passport.authenticate('jwt', { session: false }), banList, profilController.getProfil);
 router.post('/add-file', passport.authenticate('jwt', { session: false }), banList, fileController.postFile, fileController.postFileHandler);
 
 const isAdmin =(req, res, next) => {
@@ -22,13 +23,13 @@ const isAdmin =(req, res, next) => {
     }
 };
 
-router.delete('/users/rm', passport.authenticate('jwt', { session: false }), banList, isAdmin, userController.deleteUser);
+router.delete('/rm/:userId', passport.authenticate('jwt', { session: false }), banList, isAdmin, userController.deleteUser);
 
 router.get('/list', passport.authenticate('jwt', { session: false }), banList, isAdmin, userController.getUsers);
 
-router.put('/users/ban', passport.authenticate('jwt', { session: false }), banList, isAdmin, userController.banUser);
+router.put('/ban/:userId', passport.authenticate('jwt', { session: false }), banList, isAdmin, userController.banUser);
 
-router.put('/user/up', passport.authenticate('jwt', { session: false }), banList, isAdmin, userController.makeAdmin);
+router.put('/up/:userId', passport.authenticate('jwt', { session: false }), banList, isAdmin, userController.makeAdmin);
 
-router.put('/user/down', passport.authenticate('jwt', { session: false }), banList, isAdmin, userController.removeAdmin);
+router.put('/down/:userId', passport.authenticate('jwt', { session: false }), banList, isAdmin, userController.removeAdmin);
 module.exports = router; 

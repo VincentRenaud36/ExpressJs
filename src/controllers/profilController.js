@@ -15,7 +15,7 @@ exports.getProfil = async (req, res) => {
             email: user.email
         });
     } catch (error) {
-        console.error(error);
+        console.error('KO', error);
         return res.status(500).json({ error: "Internal server error" });
     }
 };
