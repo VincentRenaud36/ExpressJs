@@ -6,10 +6,11 @@ const banList = async (req, res, next) => {
 
         const user = await User.findByPk(userId);
 
-        if (user.isBanned) {
-            return res.status(403).json({ error: "Vous êtes bannis" });
+        if (user !== null && user !== undefined) {
+            if (user.isBanned) {
+                return res.status(403).json({ error: "Vous êtes bannis" });
+            }
         }
-
         next();
     } catch (error) {
         console.error("Error checking ban status:", error);

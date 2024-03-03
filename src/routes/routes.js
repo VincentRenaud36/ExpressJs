@@ -13,7 +13,7 @@ router.get('/test', helloController.getHello);
 router.post('/register', registerController.postRegister);
 router.post('/login', loginController.loginUser);
 router.get('/profil', passport.authenticate('jwt-verify', { session: false }), banList, profilController.getProfil);
-router.post('/add-file', passport.authenticate('jwt-verify', { session: false }), banList, fileController.postFile, fileController.postFileHandler);
+router.post('/add-file', passport.authenticate('jwt-verify', { session: false }), banList, fileController.postFile);
 
 const isAdmin =(req, res, next) => {
     if(req.user.isAdmin){
@@ -23,13 +23,13 @@ const isAdmin =(req, res, next) => {
     }
 };
 
-router.delete('/rm/:userId', passport.authenticate('jwt', { session: false }), banList, isAdmin, userController.deleteUser);
+router.delete('/rm/:userId', passport.authenticate('jwt-verify', { session: false }), banList, isAdmin, userController.deleteUser);
 
-router.get('/list', passport.authenticate('jwt', { session: false }), banList, isAdmin, userController.getUsers);
+router.get('/list', passport.authenticate('jwt-verify', { session: false }), banList, isAdmin, userController.getUsers);
 
-router.put('/ban/:userId', passport.authenticate('jwt', { session: false }), banList, isAdmin, userController.banUser);
+router.put('/ban/:userId', passport.authenticate('jwt-verify', { session: false }), banList, isAdmin, userController.banUser);
 
-router.put('/up/:userId', passport.authenticate('jwt', { session: false }), banList, isAdmin, userController.makeAdmin);
+router.put('/up/:userId', passport.authenticate('jwt-verify', { session: false }), banList, isAdmin, userController.makeAdmin);
 
-router.put('/down/:userId', passport.authenticate('jwt', { session: false }), banList, isAdmin, userController.removeAdmin);
+router.put('/down/:userId', passport.authenticate('jwt-verify', { session: false }), banList, isAdmin, userController.removeAdmin);
 module.exports = router; 
