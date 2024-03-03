@@ -12,8 +12,8 @@ const profilController = require('../controllers/profilController');
 router.get('/test', helloController.getHello);
 router.post('/register', registerController.postRegister);
 router.post('/login', loginController.loginUser);
-router.get('/profil', passport.authenticate('jwt', { session: false }), banList, profilController.getProfil);
-router.post('/add-file', passport.authenticate('jwt', { session: false }), banList, fileController.postFile, fileController.postFileHandler);
+router.get('/profil', passport.authenticate('jwt-verify', { session: false }), banList, profilController.getProfil);
+router.post('/add-file', passport.authenticate('jwt-verify', { session: false }), banList, fileController.postFile, fileController.postFileHandler);
 
 const isAdmin =(req, res, next) => {
     if(req.user.isAdmin){

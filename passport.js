@@ -4,7 +4,7 @@ const User = require('./src/models/user');
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt; 
 
-passport.use('jwt', new JWTStrategy({
+passport.use('jwt-verify', new JWTStrategy({
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     secretOrKey: process.env.JWT_SECRET
 }, async (jwtPayload, done) => {

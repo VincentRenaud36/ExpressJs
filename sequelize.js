@@ -1,6 +1,6 @@
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('expressjs', 'root', '', {
+const sequelize = new Sequelize('projetexpress', 'root', '', {
   host: 'localhost',
   dialect: 'mariadb'
 });

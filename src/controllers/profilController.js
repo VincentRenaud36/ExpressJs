@@ -16,6 +16,6 @@ exports.getProfil = async (req, res) => {
         });
     } catch (error) {
         console.error('KO', error);
-        return res.status(500).json({ error: "Internal server error" });
+        return res.status(500).json({ error: "Internal server error Controller" });
     }
 };
